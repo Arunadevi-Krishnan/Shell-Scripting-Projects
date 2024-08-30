@@ -6,8 +6,9 @@
 #Version : v1
 #About: Lsit the user access in particular repository
 ################
+# checking the users are passing the arguments correctly first and then execute the below comments
 
-helper()  # checking the users are passing the arguments correctly first and then execute the below comments
+helper()
 
 # GitHub API URL
 API_URL="https://api.github.com"
