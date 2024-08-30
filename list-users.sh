@@ -1,13 +1,22 @@
 #!/bin/bash
 
+#############
+#Author: Arunadevi
+#Date: 2024/08/30
+#Version : v1
+#About: Lsit the user access in particular repository
+################
+
+helper()  # checking the users are passing the arguments correctly first and then execute the below comments
+
 # GitHub API URL
 API_URL="https://api.github.com"
 
-# GitHub username and personal access token
+# GitHub username and personal access token take the values from teminal
 USERNAME=$username
 TOKEN=$token
 
-# User and Repository information
+# User and Repository information using command line arguments we will use that in command
 REPO_OWNER=$1
 REPO_NAME=$2
 
@@ -24,7 +33,7 @@ function github_api_get {
 function list_users_with_read_access {
     local endpoint="repos/${REPO_OWNER}/${REPO_NAME}/collaborators"
 
-    # Fetch the list of collaborators on the repository
+    # Fetch the list of collaborators on the repository if we remove jq output will be injson format
     collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.pull == true) | .login')"
 
     # Display the list of collaborators with read access
@@ -35,7 +44,12 @@ function list_users_with_read_access {
         echo "$collaborators"
     fi
 }
-
+function helper {
+ expected_cmd_args =2
+ if [$# -ne $expected_cmd_args]; then
+ echo " please eexecute thescript with reuired one args"
+ echo"asd"
+ }
 # Main script
 
 echo "Listing users with read access to ${REPO_OWNER}/${REPO_NAME}..."
